@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Discovering Japan</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/9.1.3/mocha.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/9.1.3/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+
   </head>
   <body>
+
     <header>
       <h1>Discovering Japan</h1>
     </header>
@@ -16,8 +21,8 @@
         Japan!
       </p>
     </section>
+    <h2>Gallery</h2>
     <section class="gallery">
-      <h2>Gallery</h2>
       <div class="image">
         <img src="./images/Tokyo.jpg" alt="Tokyo at night" />
         <p>Tokyo at night</p>
@@ -34,5 +39,45 @@
     <footer>
       <p>&copy; 2024 Discovering Japan. All rights reserved.</p>
     </footer>
+    <div id="mocha"></div>
   </body>
+  <script>
+
+   function add(a,b){
+     return a +  b;
+    }
+
+    mocha.setup("bdd");
+    const expect = chai.expect;
+
+    describe("Gallery Section", function () {
+     
+     it("should have three images", function () {
+        const images = document.querySelectorAll(".gallery .image img");
+        expect(images).to.have.lengthOf(3);
+      });
+
+      it("should display the correct alt text for the images", function () {
+        const altTexts = Array.from(document.querySelectorAll(".gallery .image img")).map(img => img.alt);
+        expect(altTexts).to.include("Tokyo at night");
+        expect(altTexts).to.include("Kyoto temple");
+        expect(altTexts).to.include("Mount Fuji");
+      });
+       it("should add two numbers", function () {
+        const result = add(5, 5);
+        expect(result).to.equal(10);
+      });
+    });
+
+    describe("add",function(){
+      it("should add two numbers",function(){
+        const result = add(5,5);
+        expect(result).to.equal(10);
+      });
+
+    });
+
+    mocha.run();
+  </script>
+<!-- <script src="script.js"></script> -->
 </html>
